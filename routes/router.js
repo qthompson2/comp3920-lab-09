@@ -2,6 +2,7 @@ const router = require('express').Router();
 const database = include('databaseConnection');
 const dbModel = include('databaseAccessLayer');
 const bcrypt = require('bcrypt');
+const userModel = include('models/web_user');
 
 //const dbModel = include('staticData');
 
@@ -73,7 +74,7 @@ router.post('/addUser', async (req, res) => {
 			email: req.body.email,
 			password_salt: password_hash
 		});
-		
+
 		await newUser.save();
 		res.redirect("/");
 	} catch(ex) {
