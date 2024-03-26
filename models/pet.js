@@ -25,4 +25,4 @@ const petType = sequelize.define('pet_type', {
 });
 
 
-module.exports = petModel;
+module.exports = {petModel, petType};
