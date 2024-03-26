@@ -14,5 +14,5 @@ const userModel = sequelize.define('web_user', {
         singular: 'web_user',
         plural: 'web_user'
     });
-    
+
 module.exports = userModel;

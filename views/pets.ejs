@@ -6,13 +6,26 @@
 		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"> </script>
 	</head>
 	<body>
-        <div class="card">
-            <h1>Pet Name</h1>
-            <% for (let i=0; i<pets.length; i++) { %>
-                <div class="card-content">
-                        <p><%= pets[i].name%></p>
-                </div>
+        <table>
+            <tr>
+                <th>Pet Name</th>
+            </tr>
+            <% for(let i=0; i < pets.length; i++) { %>
+            <tr>
+                <td><%= pets[i].name %></td>
+            </tr>
             <% } %>
-        </div>
+            <tr>
+                <td>
+                    <% if (pets.length == 0) { %>
+                        <p>There are no pets.</p>
+                    <% } else if (pets.length == 1) { %>
+                        <p>There is 1 pet.</p>
+                    <% } else { %>
+                        <p>There are <%= pets.length%> pets.</p>
+                    <% } %>
+                </td>
+            </tr>
+        </table>
     </body>
 </html>

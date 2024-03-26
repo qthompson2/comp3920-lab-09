@@ -2,7 +2,7 @@ const router = require('express').Router();
 const database = include('databaseConnection');
 const dbModel = include('databaseAccessLayer');
 const bcrypt = require('bcrypt');
-const { petModel } = require('../models/pet');
+const petModel = include('models/pet');
 const userModel = include('models/web_user');
 
 //const dbModel = include('staticData');
@@ -26,8 +26,7 @@ const userModel = include('models/web_user');
 router.get('/', async (req, res) => {
 	console.log("page hit");
 	try {
-		const users = await userModel.findAll({attributes:
-		['web_user_id','first_name','last_name','email']}); //{where: {web_user_id:1}}
+		const users = await userModel.findAll({attributes:['web_user_id','first_name','last_name','email']}); //{where: {web_user_id:1}}
 		if (users === null) {
 			res.render('error', {message: 'Error connecting toMySQL'});
 			console.log("Error connecting to userModel");
@@ -129,11 +128,15 @@ router.get('/deleteUser', async (req, res) => {
 });
 
 router.get('/pet', async (req, res) => {
-	let userId = req.query.id;
+	try {
+		let userId = req.query.id;
 
-	let pets = await petModel.findAll({where: {web_user_id: userId}});
+		const pets = await petModel.findAll({attributes:["name"], where: {web_user_id: userId}});
 
-	res.render('pets', pets);
+		res.render('pets', {pets:pets});
+	} catch (e) {
+		console.log(e);
+	}
 });
 
 module.exports = router;
