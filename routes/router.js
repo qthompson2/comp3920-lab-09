@@ -2,6 +2,7 @@ const router = require('express').Router();
 const database = include('databaseConnection');
 const dbModel = include('databaseAccessLayer');
 const bcrypt = require('bcrypt');
+const { petModel } = require('../models/pet');
 const userModel = include('models/web_user');
 
 //const dbModel = include('staticData');
@@ -127,5 +128,12 @@ router.get('/deleteUser', async (req, res) => {
 	}
 });
 
+router.get('/pet', async (req, res) => {
+	let userId = req.query.id;
+
+	let pets = await petModel.findAll({where: {web_user_id: userId}});
+
+	res.render('pets', pets);
+});
 
 module.exports = router;

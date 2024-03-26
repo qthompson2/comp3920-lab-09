@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="bulma.min.css">
+		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"> </script>
+	</head>
+	<body>
+        <div class="card">
+            <h1>Pet Name</h1>
+            <% for (let i=0; i<pets.length; i++) { %>
+                <div class="card-content">
+                        <p><%= pets[i].name%></p>
+                </div>
+            <% } %>
+        </div>
+    </body>
+</html>
